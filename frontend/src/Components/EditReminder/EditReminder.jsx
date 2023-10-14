@@ -10,10 +10,6 @@ const EditReminder = () => {
     const [getProduct, setProduct] = useState({
         title: '',
         description: '',
-        category: '',
-        price: '',
-        ratings: '',
-        thumbnail: ''
     });
 
     const changeHandle = (e) => {
@@ -59,7 +55,7 @@ const EditReminder = () => {
 
 
     const updateProduct = () => {
-        axios.patch(`http://localhost:8000/products/${id}`, getProduct).then((res) => {
+        axios.patch(`http://localhost:8000/updateReminder/${id}`, getProduct).then((res) => {
             alert('The Product has been updated ');
         }).catch((err) => {
             alert(`An error occurred while updating the product~${err}`);
@@ -67,11 +63,7 @@ const EditReminder = () => {
 
         setProduct({
             title: '',
-            description: '',
-            category: '',
-            price: '',
-            ratings: '',
-            thumbnail: ''
+            description: ''
         })
     };
 
@@ -83,37 +75,25 @@ const EditReminder = () => {
         <>
             <div className="formController" style={{ display: 'flex', justifyContent: 'center', height: '100vh', alignItems: 'center' }}>
                 <form action="">
-                    <h1 style={{ marginTop: '3rem' }}>Update Product</h1>
-                    <div className="formContainer">
+                    <h1 className='text-2xl font-semibold my-5 '>Edit Reminder</h1>
+                    <div className="formContainer ">
 
-                        <div className="sectionOne">
+                        <div className="sectionOne space-y-2">
 
-                            <label htmlFor="">Title</label><br />
-                            <input type="text" placeholder='Product Name' autoComplete='off' name='title' value={getProduct.title} onChange={changeHandle} required /> <br />
+                            <label htmlFor="">Reminder Title</label><br />
+                            <input type="text" placeholder='Reminder Title' autoComplete='off' name='title' value={getProduct.title} onChange={changeHandle} className='py-2 w-80  px-2 border' required /> <br />
 
-                            <label htmlFor="">Description</label><br />
-                            <input type="text" placeholder='About Product' autoComplete='off' name='description' value={getProduct.description} onChange={changeHandle} required /><br />
+                            <label htmlFor="">Reminder Description</label><br />
+                            <input type="text" placeholder='Reminder Description' className='py-2 border outline-none rounded-md px-2 w-80' autoComplete='off' name='description' value={getProduct.description} onChange={changeHandle} required /><br />
 
-                            <label htmlFor="">Category</label><br />
-                            <select name="category" id="" className='category' value={getProduct.category} onChange={changeHandle} required><br />
-                                <option value="Choose">Choose...</option>
-                                <option value="SmartPhone">SmartPhone</option>
-                                <option value="Laptop">Laptop</option>
-                            </select><br />
                         </div>
 
                         <div className="sectionTwo">
 
-                            <label htmlFor="">Price</label><br />
-                            <input type="number" placeholder='Amount' autoComplete='off' name='price' value={getProduct.price} onChange={changeHandle} required /><br />
 
-                            <label htmlFor="">Rating</label><br />
-                            <input type="number" placeholder='Product Rating' autoComplete='off' name='ratings' value={getProduct.ratings} onChange={changeHandle} required /><br />
+                            <button type='button' className='addBtn my-5 bg-blue-600 text-white font-semibold rounded-md py-2 px-5' onClick={updateProduct} >Update</button><br /><br />
 
-                            <label htmlFor="">Thumbnail</label><br />
-                            <input type="text" placeholder='Image link / Src' autoComplete='off' name='thumbnail' value={getProduct.thumbnail} onChange={changeHandle} required />
-                            <button type='button' className='addBtn' onClick={updateProduct}>Update</button><br /><br />
-                            <Link to={'/'} className='editBackButton' style={{ textDecoration: 'none', color: '#fff' }}>Back</Link>
+                            <Link to={'/'} className='editBackButton bg-green-500 py-2 px-10 rounded-md' style={{ textDecoration: 'none', color: '#fff' }}>Back</Link>
                         </div>
 
                     </div>

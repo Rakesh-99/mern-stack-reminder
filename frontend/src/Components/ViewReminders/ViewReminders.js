@@ -53,18 +53,18 @@ const ViewReminders = () => {
                 <div className="createBtnContainer w-full text-center py-10">
                     <Link  className='createBtn bg-blue-600 text-white py-2 px-3 rounded-md ' to={'/createreminder'}>Create Reminder</Link>
                 </div>
-                <div className="viewProduct grid grid-cols-5 px-10">
+                <div className="viewProduct grid grid-cols-5 px-10 ">
                     {
                         getData.map((getValue) => {
                             return (
 
-                                <div className="showData " key={getValue._id}>
-                                    <div className='productTitle  view'> <h2>{getValue.title}</h2></div>
+                                <div className="showData shadow-xl mx-5 space-y-3  py-5 px-5 rounded-md shadow-indigo-300 " key={getValue._id}  >
+                                    <div className='productTitle  view'> <h2 className='font-semibold'>{getValue.title}</h2></div>
                                 
                                 
                                     <div className='productDescription view'>{getValue.description}</div>
                         
-                                    <div className="btns">
+                                    <div className="btns space-x-3">
                                         <Link className='editBtn  bg-indigo-500 py-1 px-3 rounded-md font-semibold text-white' to={`/editreminder/${getValue._id}`}>Edit</Link>
                                         <button className='delete bg-red-500 py-1 px-3 rounded-md font-semibold text-white' onClick={() => { deleteHandle(getValue._id) }}>Delete</button>
                                     </div>

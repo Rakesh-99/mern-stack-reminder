@@ -19,8 +19,8 @@ router.post('/otpverify', otpVerify);
 
 router.post('/createreminder', createReminders);
 router.get('/viewreminders', viewReminders);
-router.put('/editreminders', updateReminder);
-// router.patch('/:id', productModel.updateProduct)
+// router.put('/editreminders/:id', updateReminder);
+router.patch('editreminders/:id', updateReminder);
 router.delete('/deletereminders/:id', deleteReminder);
 
 
