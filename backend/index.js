@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
-import router from './router/userRouter.js';
+import router from './Router/UserRouter.js';
 import cors from 'cors';
 import path from 'path'
 import { fileURLToPath } from 'url';
