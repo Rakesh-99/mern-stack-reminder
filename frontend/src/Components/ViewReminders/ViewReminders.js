@@ -48,17 +48,17 @@ const ViewReminders = () => {
     return (
 
         <>
-            <div className="viewProductSection">
-                <h2 style={{ textAlign: 'center', color: 'grey' }}>REMINDER </h2>
-                <div className="createBtnContainer">
-                    <Link className='createBtn' to={'/createreminder'}>Create Reminder</Link>
+            <div className="viewProductSection" >
+                <h2 style={{ textAlign: 'center', color: 'grey' }}>All REMINDERS </h2>
+                <div className="createBtnContainer w-full text-center py-10">
+                    <Link  className='createBtn bg-blue-600 text-white py-2 px-3 rounded-md ' to={'/createreminder'}>Create Reminder</Link>
                 </div>
-                <div className="viewProduct">
+                <div className="viewProduct grid grid-cols-5 px-10">
                     {
                         getData.map((getValue) => {
                             return (
 
-                                <div className="showData shadow-md" key={getValue._id}>
+                                <div className="showData " key={getValue._id}>
                                     <div className='productTitle  view'> <h2>{getValue.title}</h2></div>
                                 
                                 
