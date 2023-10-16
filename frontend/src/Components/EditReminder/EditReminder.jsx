@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Spinner from '../Spinner/Spinner';
+import { toast } from 'react-toastify';
 
 
 
 const EditReminder = () => {
 
+    const [loader, setLoader] = useState(false);
 
     const [getProduct, setProduct] = useState({
         title: '',
         description: '',
+
     });
 
     const changeHandle = (e) => {
@@ -33,7 +37,9 @@ const EditReminder = () => {
     const { id } = useParams();
 
     const getProductValue = () => {
-        axios.get(`http://localhost:8000/products/${id}`).then((res) => {
+        setLoader(true);
+        axios.get(`https://reminder-backend-8ll6.onrender.com/viewreminders/${id}`).then((res) => {
+            setLoader(false);
             setProduct(res.data);
         }).catch((err) => {
             alert('An error encountered while fetching the resources - ' + err);
@@ -55,15 +61,18 @@ const EditReminder = () => {
 
 
     const updateProduct = () => {
-        axios.patch(`http://localhost:8000/updateReminder/${id}`, getProduct).then((res) => {
-            alert('The Product has been updated ');
+        setLoader(true);
+        axios.patch(`https://reminder-backend-8ll6.onrender.com/editreminders/${id}`, getProduct).then((res) => {
+            setLoader(false);
+            toast.success('The Product has been updated');
         }).catch((err) => {
-            alert(`An error occurred while updating the product~${err}`);
+            setLoader(false);
+            toast.error('An error occurred while updating the product');
         });
 
         setProduct({
             title: '',
-            description: ''
+            description: '',
         })
     };
 
@@ -75,25 +84,25 @@ const EditReminder = () => {
         <>
             <div className="formController" style={{ display: 'flex', justifyContent: 'center', height: '100vh', alignItems: 'center' }}>
                 <form action="">
-                    <h1 className='text-2xl font-semibold my-5 '>Edit Reminder</h1>
-                    <div className="formContainer ">
+                    <h1 className='text-2xl mb-10 font-semibold'>Update Reminder</h1>
+                    <h1>{loader === true ? <p className='font-semibold text-indigo-700'>Loading...{<Spinner />}</p> : <></>}</h1>
+                    <div className="formContainer">
 
                         <div className="sectionOne space-y-2">
 
-                            <label htmlFor="">Reminder Title</label><br />
-                            <input type="text" placeholder='Reminder Title' autoComplete='off' name='title' value={getProduct.title} onChange={changeHandle} className='py-2 w-80  px-2 border' required /> <br />
+                            <label htmlFor="">Reminder title</label><br />
+                            <input type="text" placeholder='Reminder title' autoComplete='off' name='title' value={getProduct.title} onChange={changeHandle} className='w-80 rounded-sm px-3 py-2 border' required /> <br />
 
-                            <label htmlFor="">Reminder Description</label><br />
-                            <input type="text" placeholder='Reminder Description' className='py-2 border outline-none rounded-md px-2 w-80' autoComplete='off' name='description' value={getProduct.description} onChange={changeHandle} required /><br />
+                            <label htmlFor="">Reminder description</label><br />
+                            <input type="text" className='w-80 rounded-sm px-3 py-2 border' placeholder='Reminder description' autoComplete='off' name='description' value={getProduct.description} onChange={changeHandle} required /><br />
+
 
                         </div>
 
                         <div className="sectionTwo">
 
-
-                            <button type='button' className='addBtn my-5 bg-blue-600 text-white font-semibold rounded-md py-2 px-5' onClick={updateProduct} >Update</button><br /><br />
-
-                            <Link to={'/'} className='editBackButton bg-green-500 py-2 px-10 rounded-md' style={{ textDecoration: 'none', color: '#fff' }}>Back</Link>
+                            <button type='button' className='addBtn w-80 bg-indigo-700 text-white rounded-md py-2 mt-5' onClick={updateProduct}>{loader === true ? <p>Updating...<Spinner /></p> : <>Update</>}</button><br /><br />
+                            <Link to={'/viewreminders'} className='editBackButton bg-green-600 text-white py-1 px-10 rounded-md'> {'<- '} Back</Link>
                         </div>
 
                     </div>

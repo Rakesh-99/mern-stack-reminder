@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Spinner from '../Spinner/Spinner'
 
 const CreateReminder = () => {
+
+    const [loading, setLoading] = useState(false);
 
 
     const [getProduct, setProduct] = useState({
@@ -27,9 +29,12 @@ const CreateReminder = () => {
         // POST API :
 
 
-        axios.post('http://localhost:8000/createreminder/', getProduct).then((res) => {
+        setLoading(true);
+        axios.post('https://reminder-backend-8ll6.onrender.com/createreminder/', getProduct).then((res) => {
             alert('Reminder has been added to your list ');
+            setLoading(false);
         }).catch((errLog) => {
+            setLoading(false);
             alert('An error occurred while adding the Reminder' + errLog);
         });
 
@@ -58,9 +63,9 @@ const CreateReminder = () => {
 
 
 
-                    <button type='submit' className='addBtn bg-indigo-500 text-white font-semibold rounded-md py-2'>Add Reminder</button>
+                    <button type='submit' className='addBtn bg-indigo-500 active:bg-indigo-800 text-white font-semibold rounded-md py-2'>{loading === true ? <p className='font-semibold'>Please wait... <Spinner /></p> : <p>Add reminder</p>}</button>
 
-                    <Link to={'/'} className='addBtn bg-red-500 text-center text-white font-semibold rounded-md py-2'>Back</Link>
+                    <Link to={'/viewreminders'} className='addBtn bg-red-500 active:bg-red-800 text-center text-white font-semibold rounded-md py-2'>Back</Link>
 
                 </form>
             </div>

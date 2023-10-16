@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Home from './Components/Home/Home';
-import About from './Components/About/About';
 import OtpVerify from './Components/otpVerify/OtpVerify';
 import CreateReminder from './Components/CreateReminder/CreateReminder';
 import ViewReminders from './Components/ViewReminders/ViewReminders';
@@ -29,12 +28,11 @@ const App = () => {
             <Router>
                 <Routes>
                     <Route path='/viewreminders' element={<ViewReminders />} />
-                    <Route path='/editreminder/:id' element={<EditReminder />} />
+                    <Route path='/editreminders/:id' element={<EditReminder />} />
                     <Route path='/createreminder' element={<CreateReminder />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<Signup />} />
                     <Route path='/' element={<Home />} />
-                    <Route path='/about' element={<About />} />
                     <Route path='/otpVerify' element={<OtpVerify />} />
                 </Routes>
             </Router>

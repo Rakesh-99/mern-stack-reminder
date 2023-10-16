@@ -23,7 +23,7 @@ const Navbar = () => {
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('email');
         alert('You have been logged out successfully')
-        navigate('/blog');
+        navigate('/');
     }
 
 
@@ -36,7 +36,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-gradient-to-r from-blue-900 to-violet-800 p-3 sticky top-0 left-0 transition-all">
+        <nav className="bg-gradient-to-r from-blue-900 to-violet-900 p-3 sticky top-0 left-0 transition-all">
             <div className="flex items-center justify-between transition-all ">
 
                 <div className="flex items-center">
@@ -104,6 +104,8 @@ const Navbar = () => {
 
                         <li className='list-none text-white cursor-pointer hover:text-gray-300'><Link to={'/'}>Home</Link></li>
 
+
+                        <li className='list-none text-white cursor-pointer hover:text-gray-300 hover:border-b-2 border-indigo-400'><Link to={'/viewreminders'}>View Reminders</Link></li>
 
                         <li className='list-none text-white cursor-pointer hover:text-gray-300'><Link to={'/about'}>About</Link></li>
                         {
